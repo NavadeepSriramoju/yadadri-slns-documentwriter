@@ -6,6 +6,7 @@ const compression = require("compression");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || "0.0.0.0";
 
 app.disable("x-powered-by");
 app.use(helmet());
@@ -54,6 +55,7 @@ app.get("/health", (_req, res) => {
   res.json({ ok: true });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Server running at http://${HOST}:${PORT}`);
+  console.log(`Local access: http://localhost:${PORT}`);
 });
