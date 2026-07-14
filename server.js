@@ -9,7 +9,23 @@ const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "0.0.0.0";
 
 app.disable("x-powered-by");
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        styleSrc: ["'self'", "https:", "'unsafe-inline'"],
+        fontSrc: ["'self'", "https:", "data:"],
+        imgSrc: ["'self'", "https:", "data:"],
+        connectSrc: ["'self'"],
+        objectSrc: ["'none'"],
+        baseUri: ["'self'"],
+        frameAncestors: ["'self'"],
+      },
+    },
+  })
+);
 app.use(compression());
 app.use(
   rateLimit({

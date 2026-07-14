@@ -14,9 +14,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" href="https://z-cdn-media.chatglm.cn/files/c4e6e8bf-ca30-4c14-b17f-4da9ffb5d942.png?auth_key=1883937778-661d88444c9c4ea19e780c8baef576d0-0-ac0aaa15b1c0aab2f8982a3ec8f6bca6" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Serif+Telugu:wght@400;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
+<script src="/js/tailwind.js"></script>
 <script>
-tailwind.config={theme:{extend:{colors:{maroon:{DEFAULT:'#7A0C1E',dark:'#5A0916',light:'#9E1E32'},saffron:{DEFAULT:'#D4A017',light:'#F4C430',pale:'#FFF3D0'},cream:{DEFAULT:'#FFF8F0',dark:'#F5EDE0'}},fontFamily:{display:['"Playfair Display"','Georgia','serif'],body:['"Noto Sans"','system-ui','sans-serif'],telugu:['"Noto Serif Telugu"','serif']}}}}
+window.tailwind = window.tailwind || {};
+tailwind.config={theme:{extend:{colors:{maroon:{DEFAULT:'#7A0C1E',dark:'#5A0916',light:'#9E1E32'},saffron:{DEFAULT:'#D4A017',light:'#F4C430',pale:'#FFF3D0'},cream:{DEFAULT:'#FFF8F0',dark:'#F5EDE0'}},fontFamily:{display:['"Playfair Display"','Georgia','serif'],body:['"Noto Sans"','system-ui','sans-serif'],telugu:['"Noto Serif Telugu"','serif']}}}};
 </script>
 <style>
 *{-webkit-font-smoothing:antialiased}
