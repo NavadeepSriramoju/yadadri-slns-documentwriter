@@ -9,6 +9,8 @@ const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "0.0.0.0";
 
 app.disable("x-powered-by");
+app.set("trust proxy", 1);
+
 app.use(
   helmet({
     contentSecurityPolicy: {
@@ -26,6 +28,16 @@ app.use(
     },
   })
 );
+
+app.use((req, res, next) => {
+  if (req.path === "/" || req.path === "/index.html") {
+    res.setHeader("Cache-Control", "no-store");
+  }
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  next();
+});
+
 app.use(compression());
 app.use(
   rateLimit({
@@ -68,7 +80,16 @@ app.post("/api/contact", (req, res) => {
 });
 
 app.get("/health", (_req, res) => {
-  res.json({ ok: true });
+  res.json({ ok: true, service: "slns-document-writers" });
+});
+
+app.get("*", (_req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+app.use((err, _req, res, _next) => {
+  console.error("Unhandled error:", err);
+  res.status(500).json({ success: false, error: "The server is temporarily unavailable. Please try again shortly." });
 });
 
 app.listen(PORT, HOST, () => {
